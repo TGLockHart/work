@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title> สมการพหุนามกำลังสองมัธยมศึกษาปีที่ 2 </title>
+    <script>
+        var a, b, c;
+        var outputText;
+        
+        function validate() {
+        
+            // get the input
+            a = document.forms["input_form"]["aterm"].value;
+            b = document.forms["input_form"]["bterm"].value;
+            c = document.forms["input_form"]["cterm"].value;
+            
+            // validate a, b and c
+            if (a == 0) {
+                outputText = "<em>a</em> cannot equal zero!";
+            } else if (isNaN(a)) {
+                outputText = "<em>a</em> must be a number!";
+            } else if (isNaN(b)) {
+                outputText = "<em>b</em> must be a number!";
+            } else if (isNaN(c)) {
+                outputText = "<em>c</em> must be a number!";
+            } else {
+                // calculate the result using x = (-b +- sqrt(b^2 - 4ac)) / 2a
+                var x1 = (-b - Math.sqrt(Math.pow(b, 2) - 4 * a * c)) / (2 * a);
+                var x2 = (-b + Math.sqrt(Math.pow(b, 2) - 4 * a * c)) / (2 * a);
+                outputText = "สำหรับสมการ <strong>" + (a == 1 ? "" : a) + "x\u00B2 + " + (b == 1 ? "" : b) + "x + " + c + " = 0</strong>, x จะเท่ากับ <strong>" + x1 + "</strong> หรือ <strong>" + x2 + "</strong>";
+            }
+            
+            // output the result (or errors)
+            document.getElementById("output_text").innerHTML = outputText;
+        }
+    </script>
+</head>
+
+<body>
+    <p>งานนี้เป็นส่วนหนึ่งในรายวิชา EDC2102 วิทยาการจักการเรียนรู้</p>
+    <p>โปรดใส่ค่าตัวแปร <strong>a</strong>, <strong>b</strong> และ <strong>c</strong> ของสมการกำลังสองในรูปแบบ <strong>ax&#x00B2; + bx + c = 0</strong></p>
+    
+    <form name="input_form" action="javascript:validate();">
+        a: <input type="text" name="aterm" size="5" required>
+        b: <input type="text" name="bterm" size="5" required>
+        c: <input type="text" name="cterm" size="5" required>
+        <br><br>
+        <input type="submit" value="คำนวนค่า x ที่เป็นไปได้">
+    </form>
+    
+    <p id="output_text"/>
+
+</body>
+
+</html>
